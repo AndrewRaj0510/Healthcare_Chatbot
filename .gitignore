@@ -1,0 +1,32 @@
+# Byte-compiled / Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+.hlth_env/
+hlth_env/
+
+# VS Code settings
+.vscode/
+
+# Python environment files
+*.env
+*.venv
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# FAISS / vector storage (optional, large files)
+data/processed/faiss_index.index
+data/processed/docstore.pkl
