@@ -5,7 +5,7 @@ API_URL = "http://127.0.0.1:8000/chat"
 
 def chat_with_bot(user_input, history):
     if not user_input or not user_input.strip():
-        return history, ""
+        return history, history, ""
 
     response = requests.post(API_URL, json={"question": user_input})
     response.raise_for_status()
@@ -15,7 +15,8 @@ def chat_with_bot(user_input, history):
     history.append({"role": "user", "content": user_input})
     history.append({"role": "assistant", "content": bot_reply})
 
-    return history, ""
+    # IMPORTANT: return history TWICE
+    return history, history, ""
 
 with gr.Blocks(title="Healthcare Information Assistant") as demo:
     gr.Markdown("""
@@ -44,14 +45,13 @@ with gr.Blocks(title="Healthcare Information Assistant") as demo:
     txt.submit(
         chat_with_bot,
         inputs=[txt, state],
-        outputs=[chatbot, txt],
+        outputs=[chatbot, state, txt],
     )
 
-    # Button click
     submit_btn.click(
         chat_with_bot,
         inputs=[txt, state],
-        outputs=[chatbot, txt],
+        outputs=[chatbot, state, txt],
     )
 
 demo.launch()

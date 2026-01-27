@@ -1,14 +1,15 @@
 # 🏥 Healthcare Information Chatbot (RAG-based, Local LLM)
 
-A **local, privacy-friendly healthcare information chatbot** built using **Retrieval-Augmented Generation (RAG)** with **Mistral 7B Instruct (LM Studio)**.  
-The chatbot provides **educational medical information**, suggests **possible conditions without confirming diagnoses**, and always recommends consulting a qualified healthcare professional.
+A **local, privacy-friendly healthcare information chatbot** built using **Retrieval-Augmented Generation (RAG)** with **Mistral 7B Instruct (LM Studio)**. The chatbot provides **educational medical information**, suggests **possible conditions without confirming diagnoses**, and always recommends consulting a qualified healthcare professional.
 
 ---
 
 ## ⚠️ Medical Disclaimer
 
-> This chatbot is for **educational purposes only**.  
+> This chatbot is for **educational purposes only**.
+
 > It does **not provide medical diagnoses**, does **not prescribe medications**, and does **not replace professional medical advice**.  
+
 > Always consult a qualified doctor or healthcare professional for diagnosis and treatment.
 
 ---
@@ -166,7 +167,7 @@ http://127.0.0.1:8000/docs
 Run server:
 
 ```bash
-python -m src.phase6_ui.gradio_app
+python -m src.phase_6.gradio_app
 ```
 
 Open -> http://127.0.0.1:7860
@@ -229,3 +230,11 @@ Built as an **applied NLP + LLM systems project** using local inference and RAG 
 - Dockerization
 - Cloud deployment
 - Better medical entity filtering
+
+## Screenshots
+
+![Homepage Screenshot](screenshots/Homepage.png)
+
+![Screenshot 1](screenshots/Screenshot_1.png)
+
+![Screenshot 2](screenshots/Screenshot_2.png)
