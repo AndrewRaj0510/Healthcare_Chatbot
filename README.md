@@ -1,31 +1,37 @@
-# 🏥 Healthcare RAG Chatbot (Local LLM)
+# 🏥 Healthcare Information Chatbot (RAG-based, Local LLM)
 
-A **local, privacy‑preserving healthcare chatbot** built using **Retrieval‑Augmented Generation (RAG)** and **Mistral‑7B Instruct v0.2** running in **LM Studio**.
-The chatbot provides **educational medical information**, suggests **possible conditions**, and **always advises consulting a qualified healthcare professional**. It does **not confirm diagnoses**.
-
----
-
-## 🚀 Project Status
-
-✅ **Phase 1–5 Completed**
-🔜 UI, tone refinement, and safety enhancements planned
-
-Current capabilities:
-
-* Local LLM inference (no cloud APIs)
-* Vector‑based medical document retrieval
-* Safe medical prompt enforcement
-* FastAPI backend with `/chat` endpoint
+A **local, privacy-friendly healthcare information chatbot** built using **Retrieval-Augmented Generation (RAG)** with **Mistral 7B Instruct (LM Studio)**.  
+The chatbot provides **educational medical information**, suggests **possible conditions without confirming diagnoses**, and always recommends consulting a qualified healthcare professional.
 
 ---
 
-## 🧠 Key Design Principles
+## ⚠️ Medical Disclaimer
 
-* ❌ No medical diagnosis confirmation
-* ✅ Predictive language only ("may", "could", "possible")
-* ✅ General treatment & care suggestions
-* ⚠️ Always recommend consulting a doctor
-* 🔒 Fully local (LM Studio + local embeddings)
+> This chatbot is for **educational purposes only**.  
+> It does **not provide medical diagnoses**, does **not prescribe medications**, and does **not replace professional medical advice**.  
+> Always consult a qualified doctor or healthcare professional for diagnosis and treatment.
+
+---
+
+## 🎯 Project Objectives
+
+- Build a **healthcare-focused chatbot** for the general public
+- Use **RAG instead of fine-tuning**
+- Run **entirely locally** (privacy-preserving)
+- Enforce **medical safety & ethical constraints**
+- Provide a clean **UI + API architecture**
+
+---
+
+## 🧠 Key Features
+
+- ✅ Local LLM via **LM Studio (Mistral 7B Instruct v0.2)**
+- ✅ Healthcare Q&A dataset–driven retrieval
+- ✅ Vector search using embeddings
+- ✅ Medical safety guardrails (non-diagnostic)
+- ✅ FastAPI backend
+- ✅ Gradio chat UI
+- ✅ Modular, phase-wise project structure
 
 ---
 
@@ -33,15 +39,19 @@ Current capabilities:
 
 ```
 User
-  ↓
-FastAPI (/chat)
-  ↓
-Retriever (Vector DB)
-  ↓
-RAG Context Builder
-  ↓
-Mistral 7B (LM Studio)
-  ↓
+↓
+Gradio UI
+↓
+FastAPI Backend
+↓
+Retriever
+↓
+Vector Database
+↓
+Healthcare Dataset
+↓
+LM Studio (Mistral 7B Instruct)
+↓
 Safe Medical Response
 ```
 
@@ -52,12 +62,14 @@ Safe Medical Response
 ```
 Healthcare_Chatbot/
 │
+├── data/
 ├── src/
-│   ├── phase1_data/            # Dataset loading & inspection
-│   ├── phase2_processing/      # Text preprocessing & chunking
-│   ├── phase3_retrieval/       # Embeddings, vector search, retrieval
-│   ├── phase4_llm/             # LM Studio integration & prompting
-│   ├── phase5_api/             # FastAPI backend
+│   ├── phase_1/      # Dataset loading & inspection
+│   ├── phase_2/      # Text preprocessing & chunking
+│   ├── phase_3/      # Embeddings, vector search, retrieval
+│   ├── phase_4/      # LM Studio integration & prompting
+│   ├── phase_5/      # FastAPI backend
+│   ├── phase_6/      # Gradio UI
 │
 ├── lmstudio_test.py            # Standalone LM Studio test
 ├── README.md
@@ -121,11 +133,9 @@ python lmstudio_test.py
 
 * Built FastAPI backend
 * Endpoints:
-
   * `GET /health`
   * `POST /chat`
 * `/chat` connects:
-
   * Retrieval
   * Context builder
   * LM Studio inference
@@ -133,7 +143,7 @@ python lmstudio_test.py
 Run server:
 
 ```bash
-uvicorn src.phase5_api.main:app --reload
+uvicorn src.phase_5.main:app --reload
 ```
 
 Swagger UI:
@@ -144,16 +154,51 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## 🛡️ Medical Safety Prompting
+### ✅ Phase 6 — UI (Gradio)
 
-The chatbot:
+- Built interactive chat UI
+- Integrated with FastAPI backend
+- Message history handling
+- Enforced response structure
+- Strong medical disclaimers
+- Disabled empty submissions
 
-* Suggests possible conditions only
-* Avoids definitive language
-* Does not prescribe medication
-* Refers users to healthcare professionals
+Run server:
+
+```bash
+python -m src.phase6_ui.gradio_app
+```
+
+Open -> http://127.0.0.1:7860
+---
+
+## 🛡️ Medical Safety & Ethics
+
+The chatbot is designed to:
+- ❌ Never confirms a diagnosis
+- ❌ Never provides medication dosages
+- ❌ Never gives emergency instructions
+- ✅ Uses non-definitive language (“may”, “could”)
+- ✅ Always recommends consulting a doctor
+- ✅ Provides general lifestyle / care suggestions only
+
+Safety was tested against:
+- Diagnosis confirmation prompts
+- Medication dosage requests
+- Emergency scenarios
+- Mental health–related prompts
 
 This is enforced via **prompt design**, not fine‑tuning.
+
+---
+
+## ▶️ How to Run the Project
+
+- Start LM Studio
+- Load **Mistral 7B Instruct v0.2**
+- Start FastAPI Backend
+- Start Gradio UI
+- Chat with the assistant
 
 ---
 
@@ -168,14 +213,6 @@ This is enforced via **prompt design**, not fine‑tuning.
 
 ---
 
-## 🔜 Next Planned Phases
-
-* 🎨 Phase 6: UI (Gradio / Streamlit)
-* 🧠 Phase 6.5: Tone refinement & safety scoring
-* 📦 Phase 7: Project polish (docs, diagrams, deployment notes)
-
----
-
 ## ⚠️ Disclaimer
 
 This chatbot is for **educational purposes only**. It is **not a substitute for professional medical advice, diagnosis, or treatment**. Always seek the advice of a qualified healthcare provider.
@@ -185,3 +222,10 @@ This chatbot is for **educational purposes only**. It is **not a substitute for 
 ## 👨‍💻 Author
 
 Built as an **applied NLP + LLM systems project** using local inference and RAG principles.
+
+## Future Work
+
+- Streamlit UI alternative
+- Dockerization
+- Cloud deployment
+- Better medical entity filtering
